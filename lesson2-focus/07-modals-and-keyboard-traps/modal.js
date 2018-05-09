@@ -43,16 +43,38 @@ function openModal() {
 
       // SHIFT + TAB
       if (e.shiftKey) {
-
+        if(document.activeElement === firstTabStop)
+        {
+          e.preventDefault();
+          lastTabStop.focus();
+        }
+        else
+        {
+       let newIndex = (focusableElements.indexOf(document.activeElement)) -1;
+        e.preventDefault();
+        focusableElements[newIndex].focus();
+        
+        }
       // TAB
       } else {
+        if(document.activeElement === lastTabStop)
+        {
+          e.preventDefault();
+          firstTabStop.focus();
+        }
+        else
+        {
+          let newIndex = (focusableElements.indexOf(document.activeElement)) + 1;
+          e.preventDefault();
+          focusableElements[newIndex].focus();
+        }
 
       }
     }
 
     // ESCAPE
     if (e.keyCode === 27) {
-
+      closeModal();
     }
   }
 }
